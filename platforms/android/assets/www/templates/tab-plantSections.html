@@ -1,0 +1,9 @@
+<ion-view title="Odlingar">
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="plantSection in plantSections" type="item-text-wrap" href="#/tab/plantSection/{{plantSection.id}}">
+        {{plantSection.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
