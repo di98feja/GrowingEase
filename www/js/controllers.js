@@ -7,8 +7,14 @@ angular.module('growingEase.controllers', [])
   $scope.plantSections = PlantSections.all();
 })
 
-.controller('PlantSectionDetailCtrl', function($scope, $stateParams, PlantSections) {
-  $scope.plantSection = PlantSections.get($stateParams.plantSectionId);
+.controller('PlantSectionDetailCtrl', function($scope, $stateParams, PlantSections, Plants) {
+  var plantSection = PlantSections.get($stateParams.plantSectionId);
+	$scope.plantSection = plantSection;
+	$scope.plants = Plants.getPlants(plantSection.plantIdList);
+})
+
+.controller('PlantDetailCtrl', function($scope, $stateParams, Plants) {
+  $scope.plant = Plants.get($stateParams.plantId);
 })
 
 .controller('AboutCtrl', function($scope) {

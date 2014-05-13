@@ -52,12 +52,23 @@ angular.module('growingEase', ['ionic', 'growingEase.controllers', 'growingEase.
         }
       }
     })
+		
     .state('tab.plantSection-detail', {
       url: '/plantSection/:plantSectionId',
       views: {
         'tab-plantSections': {
           templateUrl: 'templates/plantSection-detail.html',
           controller: 'PlantSectionDetailCtrl'
+        }
+      }
+    })
+
+    .state('tab.plant-detail', {
+      url: '/plant/:plantId',
+      views: {
+        'tab-plantSections': {
+          templateUrl: 'templates/plant-detail.html',
+          controller: 'PlantDetailCtrl'
         }
       }
     })

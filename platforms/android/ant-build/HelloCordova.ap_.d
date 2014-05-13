@@ -99,6 +99,7 @@ C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\lib
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\plugins\org.apache.cordova.device \
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
+C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\templates\plant-detail.html \
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\templates\plantSection-detail.html \
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\templates\tab-about.html \
 C:\Users\Janne\Documents\Code\Ionic\GrowingEase\platforms\android\assets\www\templates\tab-home.html \
