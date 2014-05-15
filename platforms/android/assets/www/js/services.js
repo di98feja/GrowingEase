@@ -15,17 +15,32 @@ angular.module('growingEase.services', [])
     all: function() {
       return plants;
     },
+		
     get: function(plantId) {
-      // Simple index lookup
-      return plants[plantId];
+			var matchingPlant;
+      for (var index in plants)
+			{
+			var plant = plants[index];
+				if (plant.id == plantId)
+					matchingPlant = plant;
+			}
+      return matchingPlant;
     },
+		
 		getPlants: function(plantIdList) {
 			var myPlants = [];
-			for (id in plantIdList)	{	
+			for (var index in plantIdList)	{	
+				var id = plantIdList[index];
 				myPlants.push(plants[id]);
 			}
 			return myPlants;
+		},
+
+		newPlant: function() {
+			var nextId = plants.length;
+			return {id: nextId, name: 'Ny planta'};
 		}
+
   }
 })
 
@@ -44,10 +59,28 @@ angular.module('growingEase.services', [])
     all: function() {
       return plantSections;
     },
+		
     get: function(plantSectionId) {
-      // Simple index lookup
-      return plantSections[plantSectionId];
-    }
+			var matchingPlantSection;
+      for (var index in plantSections)
+			{
+				var plantSection = plantSections[index];
+				if (plantSection.id == plantSectionId) {
+					matchingPlantSection = plantSection;
+				}
+			}
+      return matchingPlantSection;
+    },
+		
+		deletePlantSection: function(plantSection) {
+			var sectionIndex = plantSections.indexOf(plantSection);
+			plantSections.splice(sectionIndex, 1);
+		},
+		
+		newSection: function() {
+			var nextId = plantSections.length;
+			return {id: nextId, name: 'Ny odling' , plantIdList: []};
+		}
   }
 });
 
