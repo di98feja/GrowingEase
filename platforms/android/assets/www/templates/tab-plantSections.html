@@ -14,12 +14,11 @@
 </ion-nav-bar>
 <ion-view title="Odlingar">
   <ion-content class="has-header" padding="true">
-    <ion-list show-delete="showDelete" show-reorder="showReorder">
-      <ion-item ng-repeat="plantSection in plantSections" type="item-text-wrap" href="#/tab/plantSection/{{plantSection.id}}">
-        <ion-delete-button class="ion-minus-circled" ng-click="deleteSection(plantSection)"></ion-delete-button>
+    <ion-list show-delete="showDelete">
+      <ion-item ng-repeat="(id, plantSection) in plantSections" type="item-text-wrap" href="#/tab/plantSection/{{id}}">
+        <ion-delete-button class="ion-minus-circled" ng-click="deleteSection(id)"></ion-delete-button>
 				<div class="center-text">{{plantSection.name}}</div>
 				<ion-option-button class="button-positive edit"></ion-option-button>
-				<ion-reorder-button class="ion-navicon" on-reorder="moveItem(plantSection, $fromIndex, $toIndex)"></ion-reorder-button>
 			</ion-item>
     </ion-list>
   </ion-content>

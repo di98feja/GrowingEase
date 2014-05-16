@@ -1,15 +1,13 @@
-angular.module('growingEase.services', [])
+angular.module('growingEase.services', ['firebase'])
 
 /**
  * A simple example service that returns some data.
  */
- .factory('Plants', function() {
-	var plants = [
-    { id: 0, name: 'Maskros' },
-    { id: 1, name: 'Tulpan' },
-    { id: 2, name: 'Havstulpan'},
-    { id: 3, name: 'Tussilago' }
-	];
+ .factory('Plants', ['$firebase', function($firebase) {
+	
+	 var plantsRef = new Firebase("https://luminous-fire-4986.firebaseio.com/GrowingEase/Plants");
+	 
+	 var plants = $firebase(plantsRef);
 
   return {
     all: function() {
@@ -27,12 +25,16 @@ angular.module('growingEase.services', [])
       return matchingPlant;
     },
 		
-		getPlants: function(plantIdList) {
+		getPlants: function(plantSection) {
 			var myPlants = [];
-			for (var index in plantIdList)	{	
-				var id = plantIdList[index];
-				myPlants.push(plants[id]);
-			}
+			var plantIds = plantSection.$child('plantIdList').$getIndex();
+			console.log('plantIds:' + plantIds);
+			if (null == plantIds) return myPlants;
+			plantIds.forEach(function(id, i) {
+				var plantInfo = plants.$child(id);
+				myPlants.push(plantInfo);
+			});
+
 			return myPlants;
 		},
 
@@ -42,18 +44,15 @@ angular.module('growingEase.services', [])
 		}
 
   }
-})
+}])
 
-.factory('PlantSections', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var plantSections = [
-    { id: 0, name: 'Odling 1', plantIdList: [1,2,3] },
-    { id: 1, name: 'Odling 2' , plantIdList: [0,2]},
-    { id: 2, name: 'En annan odling' , plantIdList: [2,3]},
-    { id: 3, name: 'Ogräs' , plantIdList: [1,3]}
-  ];
+.factory('PlantSections', ['$firebase', function($firebase) {
+  var plantSectionsRef = new Firebase("https://luminous-fire-4986.firebaseio.com/GrowingEase/PlantSections");
+	var plantSections = $firebase(plantSectionsRef);
+	function newSection() {
+			var nextId = plantSections.length;
+			return {id: nextId, name: 'Ny odling' , plantIdList: []};
+	};
 
   return {
     all: function() {
@@ -61,26 +60,16 @@ angular.module('growingEase.services', [])
     },
 		
     get: function(plantSectionId) {
-			var matchingPlantSection;
-      for (var index in plantSections)
-			{
-				var plantSection = plantSections[index];
-				if (plantSection.id == plantSectionId) {
-					matchingPlantSection = plantSection;
-				}
-			}
-      return matchingPlantSection;
+			return plantSections.$child(plantSectionId);
     },
 		
-		deletePlantSection: function(plantSection) {
-			var sectionIndex = plantSections.indexOf(plantSection);
-			plantSections.splice(sectionIndex, 1);
+		deletePlantSection: function(id) {
+			plantSections.$remove(id);
 		},
 		
-		newSection: function() {
-			var nextId = plantSections.length;
-			return {id: nextId, name: 'Ny odling' , plantIdList: []};
+		addSection: function() {
+			plantSections.$add(newSection());
 		}
   }
-});
+}]);
 
