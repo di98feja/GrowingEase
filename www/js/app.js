@@ -1,11 +1,4 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('growingEase', ['ionic', 'growingEase.controllers', 'growingEase.services','firebase'])
+angular.module('growingEase', ['ionic', 'growingEase.controllers', 'growingEase.services', 'growingEase.filters', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -62,13 +55,22 @@ angular.module('growingEase', ['ionic', 'growingEase.controllers', 'growingEase.
         }
       }
     })
-
     .state('tab.plant-detail', {
       url: '/plant/:plantId',
       views: {
         'tab-plantSections': {
           templateUrl: 'templates/plant-detail.html',
           controller: 'PlantDetailCtrl'
+        }
+      }
+    })
+
+    .state('tab.plant-selection', {
+      url: '/plantSelection/:plantSectionId',
+      views: {
+        'tab-plantSections': {
+          templateUrl: 'templates/plantSelector.html',
+          controller: 'PlantSelectorCtrl'
         }
       }
     })

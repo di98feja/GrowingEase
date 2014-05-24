@@ -15,20 +15,12 @@ angular.module('growingEase.services', ['firebase'])
     },
 		
     get: function(plantId) {
-			var matchingPlant;
-      for (var index in plants)
-			{
-			var plant = plants[index];
-				if (plant.id == plantId)
-					matchingPlant = plant;
-			}
-      return matchingPlant;
+			return plants.$child(plantId);
     },
 		
 		getPlants: function(plantSection) {
 			var myPlants = [];
 			var plantIds = plantSection.$child('plantIdList').$getIndex();
-			console.log('plantIds:' + plantIds);
 			if (null == plantIds) return myPlants;
 			plantIds.forEach(function(id, i) {
 				var plantInfo = plants.$child(id);
@@ -50,8 +42,7 @@ angular.module('growingEase.services', ['firebase'])
   var plantSectionsRef = new Firebase("https://luminous-fire-4986.firebaseio.com/GrowingEase/PlantSections");
 	var plantSections = $firebase(plantSectionsRef);
 	function newSection() {
-			var nextId = plantSections.length;
-			return {id: nextId, name: 'Ny odling' , plantIdList: []};
+			return {name: 'Ny odling' , plantIdList: []};
 	};
 
   return {
@@ -69,6 +60,11 @@ angular.module('growingEase.services', ['firebase'])
 		
 		addSection: function() {
 			plantSections.$add(newSection());
+		},
+		
+		savePlantSection: function(plantSection)
+		{
+			plantSection.$save();
 		}
   }
 }]);
