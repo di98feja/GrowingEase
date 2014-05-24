@@ -1,0 +1,25 @@
+<ion-nav-bar class="bar-stable nav-title-slide-ios7" >
+	<ion-nav-back-button class="button-icon icon ion-ios7-arrow-left">
+		Avbryt
+	</ion-nav-back-button>
+</ion-nav-bar>
+<ion-view title="Välj växt" >
+	<ion-header-bar>
+	</ion-header-bar>
+	<ion-content>
+		<div class="item item-input-inset">
+			<label class="item-input-wrapper">
+				<input ng-model="searchText" type="search" placeholder="Sökord">
+			</label>
+		</div>
+		<div class="list">
+			<div class="item item-button-left item-icon-right" ng-repeat="(id, plant) in plants | plants:searchText" >
+				<button class="button button-icon icon ion-ios7-checkmark-outline" ng-click="saveSelection(id)"></button>
+				<a class="block" ng-href="#/tab/plant/{{id}}">
+					{{plant.name}}
+					<i class="icon ion-ios7-arrow-right"></i>
+				</a>
+			</div>
+		</list>
+	</ion-content>
+</ion-view>
